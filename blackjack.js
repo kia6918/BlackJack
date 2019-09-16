@@ -177,11 +177,11 @@ function getNextCard() {
 
 function createDeck() {
     let deck = [];
-    for (let suitIndex = 0; suitIndex < suits.length; suitIndex++) {
-        for (let valueIndex = 0; valueIndex < values.length; valueIndex++) {
+    for (let i = 0; i < suits.length; i++) {
+        for (let j = 0; j < values.length; j++) {
             let card = {
-                suit: suits[suitIndex],
-                value: values[valueIndex]
+                suit: suits[i],
+                value: values[j]
             };
             deck.push(card);
         }
@@ -411,7 +411,7 @@ function showRealCard(card) {
             }
             i = 0;
             //3rd
-            while (i < 4) {
+            while (i < (cardValue / 2 - 1)) {
                 let div = document.createElement("div");
                 div.setAttribute("class", "card__symbol");
                 col2.appendChild(div);
@@ -456,9 +456,8 @@ function showRealCard(card) {
                     div.setAttribute("class", "card__symbol");
                     col2.appendChild(div);
                 }
-            }
-
-        }
+            } //5,7,9
+        } //>=4
     }
     return;
 }
