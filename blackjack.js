@@ -206,25 +206,22 @@ function getCardString(card) {
 
 function deleteChild() {
     //e.firstElementChild can be used. 
-    if (!dealerContainer.hasChildNodes && !playerContainer.hasChildNodes) {
-        console.log(dealerContainer.lastElementChild);
-        console.log("not empty");
-        var child = dealerContainer.lastElementChild;
-        while (child) {
-            dealerContainer.removeChild(child);
-            child = dealerContainer.lastElementChild;
-        }
 
-        child = playerContainer.lastElementChild;
-        while (child) {
-            playerContainer.removeChild(child);
-            child = playerContainer.lastElementChild;
-        }
-    } else {
-        console.log("just started");
+    console.log(dealerContainer.lastElementChild);
+    console.log("not empty");
+    var child = dealerContainer.lastElementChild;
+    while (child) {
+        dealerContainer.removeChild(child);
+        child = dealerContainer.lastElementChild;
     }
-    return;
 
+    child = playerContainer.lastElementChild;
+    while (child) {
+        playerContainer.removeChild(child);
+        child = playerContainer.lastElementChild;
+    }
+
+    return;
 }
 
 function printCard() {
@@ -240,8 +237,8 @@ function printCard() {
 
 
     let text = "\n\n\t\tDealer's card: ";
-    let p = document.createElement("p");
-    dealerContainer.appendChild(p);
+    // let p = document.createElement("p");
+    // dealerContainer.appendChild(p);
     for (let i = 0; i < dealerCards.length; i++) {
         //dealer should only display one card - fix later
         //convertToImage(dealerContainer, dealerCards[i]);
@@ -253,11 +250,11 @@ function printCard() {
         console.table(dealerCards);
         // showRealCard(dealerCards[i]);
     }
-    p.innerText = text;
+    dealerElement.innerText = text;
     //dealerElement.innerHTML = text;
     text = "\n\n\t\tPlayer's card: ";
-    let p2 = document.createElement("p");
-    playerContainer.appendChild(p2);
+    // let p2 = document.createElement("p");
+    // playerContainer.appendChild(p2);
     for (let i = 0; i < playerCards.length; i++) {
         text += getCardString(playerCards[i]);
         if (i < playerCards.length - 1) {
@@ -267,7 +264,7 @@ function printCard() {
         console.table(playerCards);
         showRealCard(playerCards[i]);
     }
-    p2.innerHTML = text;
+    playerElement.innerText = text;
     return;
 }
 
@@ -394,7 +391,9 @@ function showRealCard(card) {
             col3.setAttribute("class", "card__column");
             innerCard.appendChild(col3);
             innerCard.appendChild(col2);
-            let i = 0;
+            let i = 0,
+                j = 0,
+                k = 0;
             //1st
             while (i < (cardValue / 2 - 1)) {
                 let div = document.createElement("div");
@@ -402,44 +401,51 @@ function showRealCard(card) {
                 col1.appendChild(div);
                 i++;
             }
-            i = 0;
             //2nd
-            while (i < 2) {
+            while (j < 2) {
                 let div = document.createElement("div");
                 div.setAttribute("class", "card__symbol");
                 col3.appendChild(div);
+                j++;
             }
-            i = 0;
             //3rd
-            while (i < (cardValue / 2 - 1)) {
+            while (k < (cardValue / 2 - 1)) {
                 let div = document.createElement("div");
                 div.setAttribute("class", "card__symbol");
                 col2.appendChild(div);
+                k++;
             }
         } else {
             //card = 4 || 6
             if (cardValue === 4 || cardValue === 6) {
                 //1st
                 innerCard.appendChild(col2);
-                for (let i = 0; i < cardValue / 2; i++) {
+                let i = 0,
+                    j = 0;
+                while (i < cardValue / 2) {
                     let div = document.createElement("div");
                     div.setAttribute("class", "card__symbol");
                     col1.appendChild(div);
+                    i++;
                 }
                 //2nd
-                for (let j = 0; j < cardValue / 2; j++) {
+                while (j < cardValue / 2) {
                     let div = document.createElement("div");
                     div.setAttribute("class", "card__symbol");
                     col2.appendChild(div);
+                    j++;
                 }
             }
             //card = 5 || 7 || 9
             if (cardValue === 5 || cardValue === 7 || card === 9) {
                 //left
-                for (let i = 0; i < (cardValue - 1) / 2; i++) {
+                let i = 0,
+                    j = 0;
+                while (i < (cardValue - 1) / 2) {
                     let div = document.createElement("div");
                     div.setAttribute("class", "card__symbol");
                     col1.appendChild(div);
+                    i++;
                 }
                 //middle
                 let col3 = document.createElement("div");
@@ -451,10 +457,11 @@ function showRealCard(card) {
                 col3.appendChild(div);
 
                 //right
-                for (let j = 0; j < (cardValue - 1) / 2; j++) {
+                while (j < (cardValue - 1) / 2) {
                     let div = document.createElement("div");
                     div.setAttribute("class", "card__symbol");
                     col2.appendChild(div);
+                    j++;
                 }
             } //5,7,9
         } //>=4
