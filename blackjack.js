@@ -117,7 +117,7 @@ function dealerAction() {
             dealerCards.push(getNextCard());
             printCard();
             dealerCount++;
-        } else if (dealerScore > 14 && dealerScore < 21) {
+        } else if (dealerScore >= 15 && dealerScore < 21) {
             // 0 or 1
             let rand = getRndInteger(0, 1);
             if (rand == 0) {
@@ -277,11 +277,15 @@ function showRealCard(container, card) {
         //one col
         if (cardValue === 1) {
             col1.setAttribute("class", "card__column card__column--centered");
-        }
-        for (let i = 0; i < cardValue; i++) {
             let div = document.createElement("div");
-            div.setAttribute("class", "card__symbol");
+            div.setAttribute("class", "card__symbol card__symbol--huge");
             col1.appendChild(div);
+        } else {
+            for (let i = 0; i < cardValue; i++) {
+                let div = document.createElement("div");
+                div.setAttribute("class", "card__symbol");
+                col1.appendChild(div);
+            }
         }
     } else if (cardValue >= 4) { // card >= 4
         let col2 = document.createElement("div");
@@ -299,6 +303,9 @@ function showRealCard(container, card) {
             while (i < (cardValue / 2 - 1)) {
                 let div = document.createElement("div");
                 div.setAttribute("class", "card__symbol");
+                if (cardValue == 10 && i === 2) {
+                    div.setAttribute("class", "card__symbol card__symbol--rotated");
+                }
                 col1.appendChild(div);
                 i++;
             }
@@ -306,7 +313,7 @@ function showRealCard(container, card) {
             while (j < 2) {
                 col3.setAttribute("class", "card__column card__column--centered");
                 let div = document.createElement("div");
-                div.setAttribute("class", "card__symbol");
+                div.setAttribute("class", "card__symbol card__symbol--big");
                 col3.appendChild(div);
                 j++;
             }
@@ -314,6 +321,9 @@ function showRealCard(container, card) {
             while (k < (cardValue / 2 - 1)) {
                 let div = document.createElement("div");
                 div.setAttribute("class", "card__symbol");
+                if (cardValue == 10 && k === 2) {
+                    div.setAttribute("class", "card__symbol card__symbol--rotated");
+                }
                 col2.appendChild(div);
                 k++;
             }
@@ -346,6 +356,9 @@ function showRealCard(container, card) {
                 while (i < (cardValue - 1) / 2) {
                     let div = document.createElement("div");
                     div.setAttribute("class", "card__symbol");
+                    if (cardValue == 9 && i === 2) {
+                        div.setAttribute("class", "card__symbol card__symbol--rotated");
+                    }
                     col1.appendChild(div);
                     i++;
                 }
@@ -355,13 +368,16 @@ function showRealCard(container, card) {
                 innerCard.appendChild(col3);
                 innerCard.appendChild(col2);
                 let div = document.createElement("div");
-                div.setAttribute("class", "card__symbol");
+                div.setAttribute("class", "card__symbol card__symbol--big");
                 col3.appendChild(div);
 
                 //right
                 while (j < (cardValue - 1) / 2) {
                     let div = document.createElement("div");
                     div.setAttribute("class", "card__symbol");
+                    if (cardValue == 9 && j === 2) {
+                        div.setAttribute("class", "card__symbol card__symbol--rotated");
+                    }
                     col2.appendChild(div);
                     j++;
                 }
