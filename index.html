@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+
+<body>
+    <h1 id="title">Blackjack
+        <h4>by Yan</h4>
+    </h1>
+
+    <p id="text-area">Welcome to Blackjack!
+        <div class='text' id="content">
+            <span id="dealer-card"></span>
+            <span class='containers' id='dealer-container'></span>
+            <span id="player-card"></span>
+            <span class='containers' id='player-container'></span>
+        </div>
+        <p class='text' id="score"></p>
+        <p class='result' id='result'></p>
+    </p>
+
+    <div class="buttonBlock">
+        <div class="eachBlock">
+            <button type='button' id="new-game-button">
+                <span class='button_text'>New Game</span>
+            </button>
+        </div>
+        <div class="eachBlock">
+            <button type='button' id="hit-button">            
+                <span class='button_text'>Hit!</span>
+            </button>
+        </div>
+        <div class="eachBlock">
+            <button type='button' id="stay-button">
+                <span class='button_text'>Stay!</span>
+            </button>
+        </div>
+    </div>
+
+    <script src="blackjack.js"></script>
+
+</body>
+
+</html>
