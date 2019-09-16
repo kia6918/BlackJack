@@ -4,11 +4,12 @@
 @font-size: 16px;
 @card-background: #fff;
 @card-padding: 4px;
-@card-width: 172px;
-@card-height: 240px;
+@card-width: 160px;
+@card-height: 220px;
 @card-color-red: #e44145;
 @card-color-black: #252525;
-@card-symbol-size: 40px;
+@card-symbol-size: 28px;
+@text-font: 25px;
 
 h1 {
     color: black;
@@ -17,41 +18,29 @@ h1 {
 }
 
 h4 {
-    color: grey;
-    text-shadow: 1px 1px black;
+    color: black;
     text-align: right;
 }
 
 p {
-    color: lightgrey;
+    color: darkgreen;
     text-align: center;
-    font-size: 25px;
-    text-shadow: 1px 1px black;
+    font-size: @text-font;
     position: relative;
 }
 
 html {
-    font-size: 20px;
+    font-size: @text-font;
 }
 
 body {
-    /* background-color: lightgrey; */
-    /* background-image: url("how-to-play-blackjack-lead.jpg");
-    background-repeat: no-repeat;
-    background-size: cover; */
-    background-color: darkgrey;
+    background-color: whitesmoke;
     opacity: 1;
 }
 
 div {
-    /* background-color: black; */
-    border: 5px solid transparent;
-}
-
-img {
-    height: 50px;
-    color: white;
-    /* float: left; */
+    border: 2px solid transparent;
+    position: relative;
 }
 
 button {
@@ -61,7 +50,7 @@ button {
     padding: 20px 16px;
     text-align: center;
     text-decoration: none;
-    font-size: 20px;
+    font-size: @text-font;
     border-radius: 10px;
     width: 10em;
     height: 3em;
@@ -72,60 +61,46 @@ button {
 }
 
 .buttonBlock {
-    /* background-color: white; */
     align-items: center;
-    position: absolute;
+    position: relative;
     width: 100%;
-    bottom: 150px;
-    right: 93px;
+    right: 125px;
 }
 
 .text {
     text-align: left;
     position: relative;
-    font-size: 25px;
+    font-size: @text-font;
+}
+
+#score {
+    height: 60px;
+    text-align: center;
 }
 
 .result {
     font-size: 40px;
     color: red;
     text-align: center;
-    position: fixed;
+    position: relative;
     display: none;
     width: 100%;
-    top: 450px;
+    height: 60px;
+    // bottom: 180px;
 }
 
 span {
-    color: lightgrey;
+    color: black;
     size: auto;
-}
-
-.container {
-    display: flex;
-    /* or inline-flex */
+    opacity: 1;
 }
 
 .containers {
-    /* background-color: blanchedalmond; */
     position: relative;
     height: 300px;
     width: 100%;
     display: flex;
-}
-
-.values {
-    font-size: 50px;
-    position: relative;
-    z-index: 1;
-    /* border: 2px solid black; */
-    opacity: 1;
-}
-
-.eachCard {
-    border: 10px solid transparent;
-    /* background-color: green; */
-    opacity: 1;
+    background-color: transparent;
 }
 
 .cards {
@@ -248,13 +223,13 @@ span {
         content: "\2660";
     }
 
-    // .card---club &:before {
-    //     content: "\2663";
-    // }
+    .card--club &:before {
+        content: "\2663";
+    }
 
-    // .card--diamond &:before {
-    //     content: "\2666";
-    // }
+    .card--diamond &:before {
+        content: "\2666";
+    }
 
     &--rotated,
     &:last-of-type {

@@ -1,5 +1,5 @@
 let values = ["Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"],
-    suits = ["heart", "spade"]; //"diamond", "club", 
+    suits = ["diamond", "club", "heart", "spade"]; //"diamond", "club", 
 
 let textArea = document.getElementById('text-area'),
     startGameButton = document.getElementById('new-game-button'),
@@ -7,14 +7,11 @@ let textArea = document.getElementById('text-area'),
     stayButton = document.getElementById('stay-button'),
     content = document.getElementById('content'),
     result = document.getElementById('result'),
-    //container = document.getElementById('containers'),
     dealerElement = document.getElementById('dealer-card'),
     playerElement = document.getElementById('player-card'),
     score = document.getElementById("score"),
     playerContainer = document.getElementById('player-container'),
     dealerContainer = document.getElementById('dealer-container');
-
-console.log(playerContainer, dealerContainer);
 
 function hideButton() {
     hitButton.style.display = 'none';
@@ -56,13 +53,10 @@ startGameButton.addEventListener('click', function() {
     dealerCards = [getNextCard(), getNextCard()];
     playerCards = [getNextCard(), getNextCard()];
     printCard();
-
-    // console.log("First compare: ", playerWon);
 });
 
 //hit
 hitButton.addEventListener('click', function() {
-    // console.log(playerCount, gameOver)
     if (playerCount < 3) {
         playerCards.push(getNextCard());
         printCard();
@@ -77,7 +71,6 @@ hitButton.addEventListener('click', function() {
 //stay
 stayButton.addEventListener('click', function() {
     hitButton.style.display = 'none';
-    // console.log("current player count: ", playerCount);
     playerCount = 3;
     if (dealerCount !== 3) {
         dealerAction();
@@ -94,16 +87,14 @@ function gameIsOver() {
     let dealerScore = calcScore()[1];
 
     if (!gameOver) {
-        score.innerText += "\n\nDealer's score: " + dealerScore;
-        score.innerText += "\n\nPlayer's score: " + playerScore;
+        score.innerText += "Dealer's score: " + dealerScore;
+        score.innerText += "\nPlayer's score: " + playerScore;
         if (playerWon) {
             setTimeout(5000);
-            result.innerText = '\n\nYou Win!';
-            // console.log('win');
+            result.innerText = 'You Win!';
         } else {
             setTimeout(5000);
-            result.innerText = '\n\nYou Lose!';
-            // console.log('lose');
+            result.innerText = 'You Lose!';
         }
         result.style.display = 'block';
     }
@@ -118,44 +109,32 @@ function getRndInteger(min, max) {
 }
 
 function dealerAction() {
-    // console.log("dealer action based on: ", calcScore()[1], '\tdealer count: ', dealerCount);
     let playerScore = calcScore()[0];
     let dealerScore = calcScore()[1];
 
     if (dealerCount < 3 && playerScore <= 21) {
-        // console.log("the dealer not lose yet", dealerScore);
         if (dealerScore < 15) {
-            // console.log("the dealer score is < 15");
             dealerCards.push(getNextCard());
             printCard();
             dealerCount++;
         } else if (dealerScore > 14 && dealerScore < 21) {
             // 0 or 1
             let rand = getRndInteger(0, 1);
-            // console.log(rand);
             if (rand == 0) {
-                // console.log("rand = 0", rand);
                 dealerCards.push(getNextCard());
                 printCard();
                 dealerCount++;
             } else {
-                // console.log("rand != 0", rand);
                 dealerCount = 3;
             }
         } else if (dealerScore == 21) {
-            // console.log('dealer = 21');
             dealerCount = 3;
         } else {
-            // console.log("hit here -.-");
             dealerCount = 3;
         }
-        // console.log("dealercount:", dealerCount);
-        // console.log("gameover:", gameOver, "\tPlayerWon:", playerWon);
     }
     dealerScore = calcScore()[1];
-    // console.log("dealer's score now:", dealerScore);
     if (dealerScore > 21) {
-        // console.log("hit ++++++");
         playerWon = true;
         gameIsOver();
     } else {
@@ -163,13 +142,6 @@ function dealerAction() {
     }
     return;
 }
-
-// function showStatus() {
-//     if (!gameStarted) {
-//         textArea.innerText = 'Welcome to Bakcjack!';
-//         return;
-//     }
-// }
 
 function getNextCard() {
     return deck.shift();
@@ -199,16 +171,7 @@ function shuffleDeck() {
     return deck;
 }
 
-function getCardString(card) {
-    return card.value + ' of ' + card.suit;
-}
-
-
 function deleteChild() {
-    //e.firstElementChild can be used. 
-
-    console.log(dealerContainer.lastElementChild);
-    console.log("not empty");
     var child = dealerContainer.lastElementChild;
     while (child) {
         dealerContainer.removeChild(child);
@@ -228,41 +191,15 @@ function printCard() {
 
     deleteChild();
 
-    // let dealerContainer = document.createElement("span");
-    // dealerContainer.setAttribute("id", "dealer-container");
-    // container.appendChild(dealerContainer);
-    // let playerContainer = document.createElement("span");
-    // playerContainer.setAttribute("id", "player-container");
-    // container.appendChild(playerContainer);
+    let text = "Dealer's card: ";
 
-
-    let text = "\n\n\t\tDealer's card: ";
-    // let p = document.createElement("p");
-    // dealerContainer.appendChild(p);
     for (let i = 0; i < dealerCards.length; i++) {
-        //dealer should only display one card - fix later
-        //convertToImage(dealerContainer, dealerCards[i]);
-        text += getCardString(dealerCards[i]);
-        if (i < dealerCards.length - 1) {
-            text += "\t|\t";
-        }
-        console.log(text);
-        console.table(dealerCards);
-        // showRealCard(dealerCards[i]);
+        showRealCard(dealerContainer, dealerCards[i]);
     }
     dealerElement.innerText = text;
-    //dealerElement.innerHTML = text;
-    text = "\n\n\t\tPlayer's card: ";
-    // let p2 = document.createElement("p");
-    // playerContainer.appendChild(p2);
+    text = "Player's card: ";
     for (let i = 0; i < playerCards.length; i++) {
-        text += getCardString(playerCards[i]);
-        if (i < playerCards.length - 1) {
-            text += "\t|\t";
-        }
-        //convertToImage(playerContainer, playerCards[i]);
-        console.table(playerCards);
-        showRealCard(playerCards[i]);
+        showRealCard(playerContainer, playerCards[i]);
     }
     playerElement.innerText = text;
     return;
@@ -291,7 +228,6 @@ function calcScore() {
     if (dealerScore + 10 <= 21 && isDealerAce) {
         dealerScore += 10;
     }
-    // console.log(dealerScore, playerScore);
     let score = [playerScore, dealerScore];
     return score;
 }
@@ -299,24 +235,17 @@ function calcScore() {
 function compareScore() {
     let playerScore = calcScore()[0];
     let dealerScore = calcScore()[1];
-    // console.log(playerCount, dealerCount);
-    // console.table(playerCards);
-    // console.table(dealerCards);
-    console.log(playerScore, dealerScore, playerWon);
     if (playerScore <= 21 && dealerScore <= 21) {
         playerWon = (playerScore > dealerScore);
-        //console.log("we are <= 21");
         if (dealerCount === 3 && playerCount === 3) {
             gameIsOver();
             return playerWon;
         }
     } else if (playerScore > 21) {
-        //console.log('player>21');
         playerWon = false;
         gameIsOver();
         return playerWon;
     } else if (dealerScore > 21 && playerScore <= 21) {
-        //console.log('dealer>21');
         playerWon = true;
         gameIsOver();
         return playerWon;
@@ -324,42 +253,11 @@ function compareScore() {
     return playerWon;
 }
 
-function convertToImage(element, card) {
-    // let eachCard = document.createElement('span');
-    // eachCard.setAttribute("class", "eachCard");
-    // (element).appendChild(eachCard);
-    // let img = document.createElement('img');
-    // img.setAttribute("id", "imgs")
-    // console.log(card.suit);
-    // img.src = `${card.suit}.png`;
-    // // /**  <div class="text-block">
-    // //     <h4>Nature</h4>
-    // //     <p>What a beautiful sunrise</p>
-    // //   </div> */
-    // // img.alt = card.value;
-    // eachCard.appendChild(img);
-    // let text = document.createElement('span');
-    // text.setAttribute("class", "values");
-    // eachCard.appendChild(text);
-    // text.innerText = convertToNumericValue(card);
-    // // let _text = document.createElement('p');
-    // // _text.setAttribute("class", "text-block");
-    // // _text.innerText = convertToNumericValue(card);
-    // eachCard.appendChild(text);
-    // // //document.body.appendChild(img);
-
-    return;
-}
-
-function showRealCard(card) {
+function showRealCard(container, card) {
     let sec = document.createElement("section");
     sec.setAttribute("class", "cards");
 
-    // if (isDealer) {
-    playerContainer.appendChild(sec);
-    // } else {
-    //     playerContainer.appendChild(cardSection);
-    // }
+    container.appendChild(sec);
 
     let innerSec = document.createElement("section");
     innerSec.setAttribute("class", `card card--${card.suit}`);
@@ -377,6 +275,9 @@ function showRealCard(card) {
     // card < 4
     if (cardValue < 4) {
         //one col
+        if (cardValue === 1) {
+            col1.setAttribute("class", "card__column card__column--centered");
+        }
         for (let i = 0; i < cardValue; i++) {
             let div = document.createElement("div");
             div.setAttribute("class", "card__symbol");
@@ -403,6 +304,7 @@ function showRealCard(card) {
             }
             //2nd
             while (j < 2) {
+                col3.setAttribute("class", "card__column card__column--centered");
                 let div = document.createElement("div");
                 div.setAttribute("class", "card__symbol");
                 col3.appendChild(div);
@@ -437,7 +339,7 @@ function showRealCard(card) {
                 }
             }
             //card = 5 || 7 || 9
-            if (cardValue === 5 || cardValue === 7 || card === 9) {
+            if (cardValue === 5 || cardValue === 7 || cardValue === 9) {
                 //left
                 let i = 0,
                     j = 0;
@@ -449,7 +351,7 @@ function showRealCard(card) {
                 }
                 //middle
                 let col3 = document.createElement("div");
-                col3.setAttribute("class", "card__column");
+                col3.setAttribute("class", "card__column card__column--centered");
                 innerCard.appendChild(col3);
                 innerCard.appendChild(col2);
                 let div = document.createElement("div");

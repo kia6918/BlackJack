@@ -4,36 +4,25 @@ h1 {
   text-shadow: 1px 1px whitesmoke;
 }
 h4 {
-  color: grey;
-  text-shadow: 1px 1px black;
+  color: black;
   text-align: right;
 }
 p {
-  color: lightgrey;
+  color: darkgreen;
   text-align: center;
   font-size: 25px;
-  text-shadow: 1px 1px black;
   position: relative;
 }
 html {
-  font-size: 20px;
+  font-size: 25px;
 }
 body {
-  /* background-color: lightgrey; */
-  /* background-image: url("how-to-play-blackjack-lead.jpg");
-    background-repeat: no-repeat;
-    background-size: cover; */
-  background-color: darkgrey;
+  background-color: whitesmoke;
   opacity: 1;
 }
 div {
-  /* background-color: black; */
-  border: 5px solid transparent;
-}
-img {
-  height: 50px;
-  color: white;
-  /* float: left; */
+  border: 2px solid transparent;
+  position: relative;
 }
 button {
   background-color: green;
@@ -42,7 +31,7 @@ button {
   padding: 20px 16px;
   text-align: center;
   text-decoration: none;
-  font-size: 20px;
+  font-size: 25px;
   border-radius: 10px;
   width: 10em;
   height: 3em;
@@ -52,53 +41,40 @@ button {
   left: 50%;
 }
 .buttonBlock {
-  /* background-color: white; */
   align-items: center;
-  position: absolute;
+  position: relative;
   width: 100%;
-  bottom: 150px;
-  right: 93px;
+  right: 125px;
 }
 .text {
   text-align: left;
   position: relative;
   font-size: 25px;
 }
+#score {
+  height: 60px;
+  text-align: center;
+}
 .result {
   font-size: 40px;
   color: red;
   text-align: center;
-  position: fixed;
+  position: relative;
   display: none;
   width: 100%;
-  top: 450px;
+  height: 60px;
 }
 span {
-  color: lightgrey;
+  color: black;
   size: auto;
-}
-.container {
-  display: flex;
-  /* or inline-flex */
+  opacity: 1;
 }
 .containers {
-  /* background-color: blanchedalmond; */
   position: relative;
   height: 300px;
   width: 100%;
   display: flex;
-}
-.values {
-  font-size: 50px;
-  position: relative;
-  z-index: 1;
-  /* border: 2px solid black; */
-  opacity: 1;
-}
-.eachCard {
-  border: 10px solid transparent;
-  /* background-color: green; */
-  opacity: 1;
+  background-color: transparent;
 }
 .cards {
   text-align: center;
@@ -109,8 +85,8 @@ span {
   size: 50%;
   position: relative;
   display: inline-block;
-  width: 172px;
-  height: 240px;
+  width: 160px;
+  height: 220px;
   font: 16px 'Trebuchet MS';
   margin: 10px;
   border-radius: 4px;
@@ -185,18 +161,24 @@ span {
 }
 .card__symbol {
   display: inline-block;
-  height: 40px;
+  height: 28px;
   text-align: center;
 }
 .card__symbol:before {
-  font-size: 40px;
-  line-height: 40px;
+  font-size: 28px;
+  line-height: 28px;
 }
 .card--heart .card__symbol:before {
   content: "\2665";
 }
 .card--spade .card__symbol:before {
   content: "\2660";
+}
+.card--club .card__symbol:before {
+  content: "\2663";
+}
+.card--diamond .card__symbol:before {
+  content: "\2666";
 }
 .card__symbol--rotated,
 .card__symbol:last-of-type {
@@ -206,8 +188,8 @@ span {
   transform: rotate(0);
 }
 .card__symbol--big {
-  flex-basis: 60px;
+  flex-basis: 55px;
 }
 .card__symbol--huge {
-  flex-basis: 108px;
+  flex-basis: 99px;
 }
