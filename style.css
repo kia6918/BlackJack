@@ -192,4 +192,5 @@ span {
 }
 .card__symbol--huge {
   flex-basis: 99px;
+  top: 35px;
 }

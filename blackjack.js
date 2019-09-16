@@ -368,7 +368,7 @@ function showRealCard(container, card) {
                 innerCard.appendChild(col3);
                 innerCard.appendChild(col2);
                 let div = document.createElement("div");
-                div.setAttribute("class", "card__symbol card__symbol--big");
+                div.setAttribute("class", "card__symbol card__symbol--huge");
                 col3.appendChild(div);
 
                 //right
