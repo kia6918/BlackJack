@@ -211,13 +211,13 @@ function calcScore() {
   let playerScore = 0;
   let dealerScore = 0;
   for (let i = 0; i < playerCards.length; i++) {
-    playerScore += convertToNumericValue(playerCards[i]);
+    playerScore += convertToNumericValue(playerCards[i], true);
     if (playerCards[i].value === 'Ace') {
       isPlayerAce = true;
     }
   }
   for (let i = 0; i < dealerCards.length; i++) {
-    dealerScore += convertToNumericValue(dealerCards[i]);
+    dealerScore += convertToNumericValue(dealerCards[i], true);
     if (dealerCards[i].value === 'Ace') {
       isDealerAce = true;
     }
@@ -261,7 +261,19 @@ function showRealCard(container, card) {
 
   let innerSec = document.createElement("section");
   innerSec.setAttribute("class", `card card--${card.suit}`);
-  let cardValue = convertToNumericValue(card);
+  let cardValue = convertToNumericValue(card, false);
+  if (cardValue === 11) {
+    innerSec.setAttribute("class", `card card--${card.suit} card--J`);
+    cardValue = 'J';
+  }
+  if (cardValue === 12) {
+    innerSec.setAttribute("class", `card card--${card.suit} card--Q`);
+    cardValue = 'Q';
+  }
+  if (cardValue === 13) {
+    innerSec.setAttribute("class", `card card--${card.suit} card--K`);
+    cardValue = 'K';
+  }
   innerSec.setAttribute("value", cardValue);
 
   sec.appendChild(innerSec);
@@ -273,6 +285,13 @@ function showRealCard(container, card) {
   col1.setAttribute("class", "card__column");
   innerCard.appendChild(col1);
   // card < 4
+  if (cardValue === 'J' || cardValue === 'Q' || cardValue === 'K') {
+    col1.setAttribute("class", "card__column card__column--centered");
+    let div = document.createElement("div");
+    div.setAttribute("class", "card__symbol card__symbol--special");
+    col1.appendChild(div);
+  }
+
   if (cardValue < 4) {
     //one col
     if (cardValue === 1) {
@@ -387,7 +406,7 @@ function showRealCard(container, card) {
   return;
 }
 
-function convertToNumericValue(card) {
+function convertToNumericValue(card, forCal) {
   switch (card.value) {
     case "Ace":
       return 1;
@@ -410,11 +429,23 @@ function convertToNumericValue(card) {
     case "Ten":
       return 10;
     case "Jack":
-      return 10;
+      if (forCal) {
+        return 10;
+      } else {
+        return 11;
+      }
     case "Queen":
-      return 10;
+      if (forCal) {
+        return 10;
+      } else {
+        return 12;
+      }
     case "King":
-      return 10;
+      if (forCal) {
+        return 10;
+      } else {
+        return 13;
+      }
     default:
       return 0;
   }

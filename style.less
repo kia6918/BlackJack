@@ -215,11 +215,9 @@ span {
 
     .card--heart &:before {
         content: "\2665";
-        // content: '♥';
     }
 
     .card--spade &:before {
-        // content: '♠';
         content: "\2660";
     }
 
@@ -229,6 +227,16 @@ span {
 
     .card--diamond &:before {
         content: "\2666";
+    }
+    // something need to work on
+    .card--J &:before {
+      content: "\265E";
+    }
+    .card--Q &:before {
+      content: "\265B";
+    }
+    .card--K &:before {
+      content: "\265A";
     }
 
     &--rotated,
@@ -244,5 +252,9 @@ span {
     &--huge {
         flex-basis: 0.45 * @card-height;
         top: 35px;
+    }
+    &--special {
+        flex-basis: 0.5 * @card-height;
+        top: 40px;
     }
 }

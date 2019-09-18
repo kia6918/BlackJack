@@ -180,6 +180,15 @@ span {
 .card--diamond .card__symbol:before {
   content: "\2666";
 }
+.card--J .card__symbol:before {
+  content: "\265E";
+}
+.card--Q .card__symbol:before {
+  content: "\265B";
+}
+.card--K .card__symbol:before {
+  content: "\265A";
+}
 .card__symbol--rotated,
 .card__symbol:last-of-type {
   transform: rotate(180deg);
@@ -193,4 +202,8 @@ span {
 .card__symbol--huge {
   flex-basis: 99px;
   top: 35px;
+}
+.card__symbol--special {
+  flex-basis: 110px;
+  top: 40px;
 }
